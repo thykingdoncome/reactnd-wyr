@@ -10,10 +10,25 @@ import reportWebVitals from "./reportWebVitals";
 const config = {
   initialColorMode: "light",
   useSystemColorMode: false,
+
 };
 
 const theme = extendTheme({
   config,
+  Tabs: {
+    variants: {
+      unstyled: {
+        paddingY: '4',
+        marging: '0',
+        tab: {
+          _selected: {
+            color: 'white',
+            boxShadow: 'none',
+          },
+        },
+      },
+    },
+  },
 });
 
 ReactDOM.render(

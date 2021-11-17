@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Tabs, TabList, TabPanels, Tab, TabPanel, Box } from "@chakra-ui/react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import QuestionsList from "./QuestionsList";
-import Navbar from "./Navbar";
 
 const DashboardOverview = () => {
-  const state = useSelector(state => state);
+  const state = useSelector((state) => state);
   const { authedUser, users, questions } = state;
   const [answered, setAnswered] = useState([]);
   const [unanswered, setUnnswered] = useState([]);
@@ -13,11 +12,11 @@ const DashboardOverview = () => {
   useEffect(() => {
     const getAnsweredQuestions = () => {
       const answeredArray = Object.keys(questions)
-        .filter(id => users[authedUser].answers[id])
+        .filter((id) => users[authedUser].answers[id])
         .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
 
       const unAnsweredArray = Object.keys(questions)
-        .filter(id => !users[authedUser].answers[id])
+        .filter((id) => !users[authedUser].answers[id])
         .sort((a, b) => questions[b].timestamp - questions[a].timestamp);
 
       setAnswered(answeredArray);
@@ -25,27 +24,29 @@ const DashboardOverview = () => {
     };
 
     getAnsweredQuestions();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <div>
-      <Navbar userName={users[authedUser].name} />
-      <Box background='cyan.300' minHeight='100vh'>
-        <Tabs isFitted variant='enclosed'>
-          <TabList mb='1em'>
-            <Tab>Unanswered Questions</Tab>
-            <Tab>Answered Questions</Tab>
+      <Box minHeight="100vh" width="50%" margin="auto">
+        <Tabs isFitted variant="enclosed">
+          <TabList mb="1em">
+            <Tab color="black" fontWeight={800}>
+              Unanswered Questions
+            </Tab>
+            <Tab color="blackAlpha.900" fontWeight={800}>
+              Answered Questions
+            </Tab>
           </TabList>
           <TabPanels>
             <TabPanel>
-              {/* <p>Unanswered Questions</p> */}
               <Box>
-                <QuestionsList questionIds={unanswered} />
+                <QuestionsList questionIds={unanswered} isAnswered={false} />
               </Box>
             </TabPanel>
             <TabPanel>
-              <p>Answered Questions</p>
-              <QuestionsList questionIds={answered} />
+              <QuestionsList questionIds={answered} isAnswered={true} />
             </TabPanel>
           </TabPanels>
         </Tabs>

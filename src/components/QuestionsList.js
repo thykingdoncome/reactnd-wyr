@@ -1,31 +1,16 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import QuestionCard from "./QuestionCard";
+import React from "react";
+import QuestionCard from "./cards/QuestionCard";
+import { List, Flex } from "@chakra-ui/react";
 
-const QuestionsList = ({ questionIds }) => {
-  const state = useSelector(state => state);
-  const { authedUser, users, questions } = state;
-
-  // console.log(questions[questionIds], "pam pam pam");
-  // console.log(questionIds, "pam pam pam");
-
-  const mapIdToQ = () => {
-    const quest = questionIds.map((q, idx) => questions[q]);
-    return quest;
-  };
-
-  useEffect(() => {
-    // mapIdToQ();
-  });
-
+const QuestionsList = ({ questionIds, isAnswered }) => {
   return (
-    <div>
-      <ul>
-        {questionIds.map(qID => (
-          <QuestionCard key={qID} questionId={qID} />
+    <Flex alignItems="center" justifyContent="center">
+      <List>
+        {questionIds.map((qID) => (
+          <QuestionCard key={qID} questionId={qID} isAnswered={isAnswered} />
         ))}
-      </ul>
-    </div>
+      </List>
+    </Flex>
   );
 };
 

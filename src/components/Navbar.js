@@ -18,12 +18,29 @@ import {
   Text,
   // Stack,
 } from "@chakra-ui/react";
+import { Link as ReachLink } from "react-router-dom";
 // import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-const Links = ["Dashboard", "Create New Poll", "Leaderboard"];
+// const Linkss = ["Dashboard", "Create New Poll", "Leaderboard"];
+const Links = [
+  {
+    linkTo: "/",
+    name: "Dashboard",
+  },
+  {
+    linkTo: "/new",
+    name: "Create New Poll",
+  },
+  {
+    linkTo: "/leaderboard",
+    name: "Leaderboard",
+  },
+];
 
-const NavLink = ({ children }) => (
+const NavLink = ({ toLink, children }) => (
   <Link
+    as={ReachLink}
+    to={toLink}
     px={2}
     py={1}
     rounded={"md"}
@@ -31,20 +48,30 @@ const NavLink = ({ children }) => (
       textDecoration: "none",
       bg: useColorModeValue("gray.200", "gray.700"),
     }}
-    href={"#"}
+    _active={{
+      bg: useColorModeValue("blue.200", "blue.700"),
+    }}
   >
     {children}
   </Link>
 );
 
 export default function Navbar() {
-  const state = useSelector(state => state);
+  const state = useSelector((state) => state);
   const { authedUser, users } = state;
   // const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Box bg={useColorModeValue("gray.100", "gray.900")} px={4}>
+      <Box
+        bg={useColorModeValue("gray.100", "gray.900")}
+        px={4}
+        position="fixed"
+        top={0}
+        right={0}
+        left={0}
+        zIndex={2}
+      >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
           <HStack spacing={8} alignItems={"center"}>
             <HStack
@@ -52,8 +79,10 @@ export default function Navbar() {
               spacing={4}
               display={{ base: "none", md: "flex" }}
             >
-              {Links.map(link => (
-                <NavLink key={link}>{link}</NavLink>
+              {Links.map((link) => (
+                <NavLink toLink={link.linkTo} key={link.name}>
+                  {link.name}
+                </NavLink>
               ))}
             </HStack>
           </HStack>
