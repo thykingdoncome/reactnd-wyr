@@ -6,22 +6,20 @@ import {
   Avatar,
   HStack,
   Link,
-  // IconButton,
+  IconButton,
   Button,
   Menu,
   MenuButton,
   MenuList,
   MenuItem,
-  // MenuDivider,
-  // useDisclosure,
+  useDisclosure,
   useColorModeValue,
   Text,
-  // Stack,
+  Stack,
 } from "@chakra-ui/react";
 import { Link as ReachLink } from "react-router-dom";
-// import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
-// const Linkss = ["Dashboard", "Create New Poll", "Leaderboard"];
 const Links = [
   {
     linkTo: "/",
@@ -37,7 +35,7 @@ const Links = [
   },
 ];
 
-const NavLink = ({ toLink, children }) => (
+const NavLink = ({ toLink, isMobile, click, children }) => (
   <Link
     as={ReachLink}
     to={toLink}
@@ -51,6 +49,7 @@ const NavLink = ({ toLink, children }) => (
     _active={{
       bg: useColorModeValue("blue.200", "blue.700"),
     }}
+    onClick={isMobile ? click : undefined}
   >
     {children}
   </Link>
@@ -59,7 +58,7 @@ const NavLink = ({ toLink, children }) => (
 export default function Navbar() {
   const state = useSelector((state) => state);
   const { authedUser, users } = state;
-  // const { isOpen, onOpen, onClose } = useDisclosure();
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
@@ -73,6 +72,13 @@ export default function Navbar() {
         zIndex={2}
       >
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+          <IconButton
+            size={"md"}
+            icon={isOpen ? <CloseIcon /> : <HamburgerIcon />}
+            aria-label={"Open Menu"}
+            display={{ md: "none" }}
+            onClick={isOpen ? onClose : onOpen}
+          />
           <HStack spacing={8} alignItems={"center"}>
             <HStack
               as={"nav"}
@@ -111,6 +117,22 @@ export default function Navbar() {
             </Menu>
           </Flex>
         </Flex>
+        {isOpen ? (
+          <Box pb={4} display={{ md: "none" }}>
+            <Stack as={"nav"} spacing={4}>
+              {Links.map((link) => (
+                <NavLink
+                  toLink={link.linkTo}
+                  key={link.name}
+                  isMobile={true}
+                  click={isOpen ? onClose : onOpen}
+                >
+                  {link.name}
+                </NavLink>
+              ))}
+            </Stack>
+          </Box>
+        ) : null}
       </Box>
     </>
   );
