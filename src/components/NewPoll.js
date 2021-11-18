@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Button,
   Flex,
@@ -10,9 +11,13 @@ import {
   Stack,
   useToast,
 } from "@chakra-ui/react";
+import { handleAddQuestion } from "../redux/actions/questions.actions";
 
 const NewPoll = () => {
+  const dispatch = useDispatch();
   const toast = useToast();
+  const navigate = useNavigate();
+
   const [optionOne, setOptionOne] = useState("");
   const [optionTwo, setOptionTwo] = useState("");
 
@@ -27,7 +32,7 @@ const NewPoll = () => {
         position: "top",
       });
     } else {
-      console.log(optionOne, optionTwo);
+      dispatch(handleAddQuestion(optionOne, optionTwo, navigate));
     }
   };
 

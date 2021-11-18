@@ -1,5 +1,5 @@
 import React from "react";
-import { ListItem, Text, Flex, Avatar } from "@chakra-ui/react";
+import { ListItem, Text, Flex, Box, Avatar } from "@chakra-ui/react";
 
 const LeaderboardCard = ({ data }) => {
   const { name, score, pollsAnswered, pollsCreated, avatarURL } = data;
@@ -22,7 +22,12 @@ const LeaderboardCard = ({ data }) => {
           width="50%"
           borderX="1px solid blue"
         >
-          <Text color="black" mb={3}>
+          <Text
+            mb={3}
+            fontWeight={800}
+            textDecoration="underline"
+            color="blue.400"
+          >
             {name}
           </Text>
           <Text color="black" mb={3}>
@@ -30,18 +35,29 @@ const LeaderboardCard = ({ data }) => {
           </Text>
           <Text color="black">Created Questions: {pollsCreated}</Text>
         </Flex>
-        <Flex
-          height={20}
-          width={20}
-          justifyContent="center"
-          alignContent="center"
-          bg="blue.400"
-          rounded="full"
-        >
-          <Text as="h2" my="auto" fontWeight={800} color="white" fontSize={25}>
-            {score}
+        <Box>
+          <Text color="black" textAlign="center" fontWeight={600}>
+            Score
           </Text>
-        </Flex>
+          <Flex
+            height={20}
+            width={20}
+            justifyContent="center"
+            alignContent="center"
+            bg="blue.400"
+            rounded="full"
+          >
+            <Text
+              as="h2"
+              my="auto"
+              fontWeight={800}
+              color="white"
+              fontSize={25}
+            >
+              {score}
+            </Text>
+          </Flex>
+        </Box>
       </Flex>
     </ListItem>
   );

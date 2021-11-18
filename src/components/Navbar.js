@@ -26,7 +26,7 @@ const Links = [
     name: "Dashboard",
   },
   {
-    linkTo: "/new",
+    linkTo: "/add",
     name: "Create New Poll",
   },
   {
@@ -104,7 +104,11 @@ export default function Navbar() {
                 cursor={"pointer"}
                 minW={0}
               >
-                <Avatar size={"sm"} src={users[authedUser].avatarURL} />
+                <Avatar
+                  name={users[authedUser].name}
+                  size={"sm"}
+                  src={users[authedUser].avatarURL}
+                />
               </MenuButton>
               <MenuList>
                 <MenuItem>Logout</MenuItem>

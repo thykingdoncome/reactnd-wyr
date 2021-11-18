@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Flex } from "@chakra-ui/react";
 import { useParams } from "react-router";
@@ -13,17 +13,24 @@ const QuestionView = () => {
 
   const param = useParams();
 
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    setAnswers(users[authedUser].answers);
+  }, [questions]);
+
   if (!questions[param.id]) {
     return <Navigate to="/error" />;
   }
 
   const cardToDisplay = () =>
-    users[authedUser].answers[param.id] ? (
+    answers.hasOwnProperty(param.id) ? (
       <ResultCard questionId={param?.id} />
     ) : (
       <PollCard questionId={param?.id} />
     );
 
+  console.log("loaded");
   return (
     <Container color="black">
       <Flex
@@ -33,6 +40,7 @@ const QuestionView = () => {
         justifyContent="center"
       >
         {cardToDisplay()}
+        {/* {} */}
       </Flex>
     </Container>
   );

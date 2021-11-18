@@ -32,7 +32,7 @@ const DashboardOverview = () => {
       <Box minH={"calc(100vh - 64px)"} width="50%" margin="auto">
         <Tabs isFitted variant="enclosed">
           <TabList mb="1em">
-            <Tab color="black" fontWeight={800}>
+            <Tab color="blackAlpha.900" fontWeight={800}>
               Unanswered Questions
             </Tab>
             <Tab color="blackAlpha.900" fontWeight={800}>

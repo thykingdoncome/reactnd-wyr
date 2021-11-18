@@ -18,7 +18,7 @@ const PrivateRoutes = () => {
           <Route path="*" element={<NotFound />} />
           <Route path="/error" element={<NotFound />} />
           <Route exact path="/" element={<DashboardOverview />} />
-          <Route exact path="/new" element={<NewPoll />} />
+          <Route exact path="/add" element={<NewPoll />} />
           <Route exact path="/leaderboard" element={<Leaderboard />} />
           <Route exact path="/questions/:id" element={<QuestionView />} />
         </Routes>

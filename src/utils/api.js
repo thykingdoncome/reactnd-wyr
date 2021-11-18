@@ -3,7 +3,7 @@ import {
   _getQuestions,
   _saveQuestion,
   _saveQuestionAnswer,
-} from "./api.creators";
+} from "./_DATA";
 
 export const getInitialData = () => {
   return Promise.all([_getUsers(), _getQuestions()]).then(
@@ -14,6 +14,6 @@ export const getInitialData = () => {
   );
 };
 
-export const saveQuestion = question => _saveQuestion(question);
+export const saveQuestion = (question) => _saveQuestion(question);
 
-export const sveQuestionAnswer = answer => _saveQuestionAnswer(answer);
+export const saveQuestionAnswer = (answer) => _saveQuestionAnswer(answer);

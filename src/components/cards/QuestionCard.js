@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { formatQuestion } from "../../utils/helpers";
+import { formatQuestionHelper } from "../../utils/helpers";
 import { Box, Flex, Avatar, Text, Button, ListItem } from "@chakra-ui/react";
 
 const QuestionCard = ({ questionId, isAnswered }) => {
@@ -12,7 +12,7 @@ const QuestionCard = ({ questionId, isAnswered }) => {
 
   const formatQuestionHandler = () => {
     let question = questions[questionId];
-    const formated = formatQuestion(
+    const formated = formatQuestionHelper(
       question,
       users[question?.author],
       authedUser

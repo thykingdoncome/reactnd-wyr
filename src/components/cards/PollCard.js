@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { formatQuestion } from "../../utils/helpers";
+import { useSelector, useDispatch } from "react-redux";
+import { formatQuestionHelper } from "../../utils/helpers";
 import {
   Box,
   Flex,
@@ -12,8 +12,10 @@ import {
   RadioGroup,
   useToast,
 } from "@chakra-ui/react";
+import { handleSaveAnswer } from "../../redux/actions/questions.actions";
 
 const PollCard = ({ questionId }) => {
+  const dispatch = useDispatch();
   const toast = useToast();
 
   const state = useSelector((state) => state);
@@ -24,7 +26,7 @@ const PollCard = ({ questionId }) => {
 
   const formatQuestionHandler = () => {
     let question = questions[questionId];
-    const formated = formatQuestion(
+    const formated = formatQuestionHelper(
       question,
       users[question?.author],
       authedUser
@@ -35,7 +37,9 @@ const PollCard = ({ questionId }) => {
   useEffect(() => {
     formatQuestionHandler();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
+
+  // console.log(data, "datttttaaa");
 
   const handleSubmit = () => {
     if (value === "") {
@@ -48,9 +52,9 @@ const PollCard = ({ questionId }) => {
         position: "top",
       });
       return;
+    } else {
+      dispatch(handleSaveAnswer(questionId, value));
     }
-
-    console.log(value, "===val");
   };
 
   return (
@@ -100,7 +104,7 @@ const PollCard = ({ questionId }) => {
             </Stack>
           </RadioGroup>
           <Button
-            onClick={handleSubmit}
+            onClick={() => handleSubmit()}
             bg={"blue.400"}
             color={"white"}
             _hover={{ bg: "blue.500" }}

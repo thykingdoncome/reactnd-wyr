@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import { formatQuestion } from "../../utils/helpers";
+import { formatQuestionHelper } from "../../utils/helpers";
 import { Box, Flex, Avatar, Text, Progress } from "@chakra-ui/react";
 import { CheckIcon } from "@chakra-ui/icons";
 
@@ -14,7 +14,7 @@ const ResultCard = ({ questionId }) => {
 
   const formatQuestionHandler = () => {
     let question = questions[questionId];
-    const formated = formatQuestion(
+    const formated = formatQuestionHelper(
       question,
       users[question?.author],
       authedUser
@@ -63,7 +63,7 @@ const ResultCard = ({ questionId }) => {
       </Text>
       <Flex alignItems="center">
         <Box mr={4}>
-          <Avatar size="xl" name={data?.name} />
+          <Avatar size="xl" name={data?.name} src={data?.avatarURL} />
         </Box>
         <Flex
           alignItems="center"
