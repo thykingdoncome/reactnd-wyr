@@ -32,7 +32,7 @@ const NewPoll = () => {
   };
 
   return (
-    <Flex minH={"100vh"} align={"center"} justify={"center"}>
+    <Flex minH={"calc(100vh - 64px)"} align={"center"} justify={"center"}>
       <Stack
         spacing={4}
         w={"full"}

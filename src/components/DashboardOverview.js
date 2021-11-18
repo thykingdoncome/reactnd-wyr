@@ -29,7 +29,7 @@ const DashboardOverview = () => {
 
   return (
     <div>
-      <Box minHeight="100vh" width="50%" margin="auto">
+      <Box minH={"calc(100vh - 64px)"} width="50%" margin="auto">
         <Tabs isFitted variant="enclosed">
           <TabList mb="1em">
             <Tab color="black" fontWeight={800}>

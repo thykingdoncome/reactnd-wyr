@@ -75,7 +75,7 @@ const PollCard = ({ questionId }) => {
       </Text>
       <Flex alignItems="center">
         <Box mr={4}>
-          <Avatar size="xl" name={data?.name} />
+          <Avatar size="xl" name={data?.name} src={data?.avatarURL} />
         </Box>
         <Flex
           alignItems="center"
