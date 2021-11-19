@@ -13,8 +13,7 @@ function App() {
 
   useEffect(() => {
     dispatch(handleInitialData());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dispatch]);
 
   return <Box>{!authedUser ? <Login /> : <PrivateRoutes />}</Box>;
 }

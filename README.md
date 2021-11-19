@@ -9,9 +9,13 @@ The project was built using React and redux for state management and interacts w
 ## Setup
 
 - Clone the repo
+- Install `node.js` if you haven't already
 - Install `yarn` globally if you haven't already
 - Run the command `yarn` or `yarn add` to install dependencies
 - Run `yarn start` to start the application locally
 - You should be able to the application on `http://localhost:3000`
 - You should be able to create a new poll at the `/add` route.
 - You should be able to view the leaderboard at the `/leaderboard` route.
+
+## Author
+[Israel Azemoh](https://twitter.com/davidisraell).

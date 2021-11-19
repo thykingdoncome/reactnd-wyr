@@ -15,7 +15,6 @@ const questions = (state = {}, action) => {
       return { ...state, [action.question.id]: action.question };
     case ADD_ANSWER:
       const { authedUser, qid, answer } = action.answerPayload;
-      console.log(state, "sttttaaattee");
       return {
         ...state,
         [qid]: {
