@@ -17,7 +17,8 @@ const QuestionView = () => {
 
   useEffect(() => {
     setAnswers(users[authedUser].answers);
-  }, [questions]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [questions, users]);
 
   if (!questions[param.id]) {
     return <Navigate to="/error" />;
@@ -30,7 +31,6 @@ const QuestionView = () => {
       <PollCard questionId={param?.id} />
     );
 
-  console.log("loaded");
   return (
     <Container color="black">
       <Flex

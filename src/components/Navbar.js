@@ -1,5 +1,6 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Flex,
@@ -19,6 +20,7 @@ import {
 } from "@chakra-ui/react";
 import { Link as ReachLink } from "react-router-dom";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { clearAuthedUser } from "../redux/actions/authedUser.action";
 
 const Links = [
   {
@@ -56,9 +58,17 @@ const NavLink = ({ toLink, isMobile, click, children }) => (
 );
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   const state = useSelector((state) => state);
   const { authedUser, users } = state;
-  const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const handleLogout = () => {
+    dispatch(clearAuthedUser());
+    navigate("/");
+  };
 
   return (
     <>
@@ -111,7 +121,7 @@ export default function Navbar() {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Logout</MenuItem>
+                <MenuItem onClick={handleLogout}>Logout</MenuItem>
               </MenuList>
             </Menu>
           </Flex>
